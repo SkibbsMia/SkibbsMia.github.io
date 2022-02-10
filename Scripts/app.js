@@ -25,16 +25,34 @@ function Bio()
         document.getElementById("IdMariaInfo").appendChild(mariaBio);
         document.getElementById("IdEricInfo").appendChild(ericBio);
     }
-    
-    /*Using only JavaScript change the Products link found in the Navbar above to Projects. */
+    else if ( window.location.pathname == "/Scripts/contact.html")
+    {
 
-    document.getElementById("IdProductLink").innerText = "Project";
+    }
+    /*Using only JavaScript change the Products link found in the Navbar above to Projects. */
+    document.getElementById("IdProductLink").innerText = "Projects";
 
     /*Using only JavaScript, add another link to the Navbar above named Human Resources,
     that sits between About Us and Contact Us. You may not hard code this in the html file
     this must be done using DOM manipulation. Ensure that you also include an appropriate
     font-icon using Font-Awesome */
 
+    // Find the ul in the Nav bar
+    var ul = document.getElementById("IdNavList");
+
+    // Create new elements
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+
+    // Set attributes to the a tag
+    a.setAttribute( "href", "humanResources.html");
+    a.setAttribute( "id", "IdhumanResources");
+
+    // Append the nodes together
+    a.appendChild(document.createTextNode("Human Resources"));
+    li.appendChild(a);
+    // Instert the new link in the Navbar between About Us and Contact Us
+    ul.insertBefore(li, document.getElementById("IdAboutList"));
 }
 
 window.addEventListener( "load", Bio, false);
