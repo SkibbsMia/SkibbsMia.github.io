@@ -4,7 +4,7 @@ Student IDs: *********, 100481944
 Date Completed: February 10th, 2022
 */
 
-function Bio()
+function Start()
 {
     /*All the text (body copy) for your site content above should be injected in the page via
     JavaScript only. For this Lab, you may hard code your text in string variables.*/
@@ -55,4 +55,4 @@ function Bio()
     ul.insertBefore(li, document.getElementById("IdAboutList"));
 }
 
-window.addEventListener( "load", Bio, false);
+window.addEventListener( "DOMContentLoaded", Start, false);
