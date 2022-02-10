@@ -22,7 +22,3 @@ ul {
     color: white;
     text-decoration: none;
   }
-  
-  li a:hover:not(.active) {
-    background-color: #111;
-  }
