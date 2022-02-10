@@ -4,27 +4,31 @@ Student IDs: *********, 100481944
 Date Completed: February 10th, 2022
 */
 
-function start()
+function Bio()
 {
     /*All the text (body copy) for your site content above should be injected in the page via
     JavaScript only. For this Lab, you may hard code your text in string variables.*/
-
+    
     // Text for the about page
-    var aboutIntro = document.createTextNode("Information about the people who created this website.");
+    if ( window.location.pathname == "/Scripts/about.html")
+    {
+        var aboutIntro = document.createTextNode("Information about the people who created this website.");
 
-    var mariaBio = document.createTextNode("Maria Skibinski is a twenty-one year old attending Durham College in Ontario for Computer Programming and Analysis." +
-    "She is currently at McDonald's and has been for five years and hopes to find a job in her field. Programming is a passion," +
-    " and she just loves to work on coding project and be able to problem solve. Currently her main interest is web development " +
-    "as she finds interest in Front-end Web Development. (Working with HTML, CSS, JavaScript, Php and many more)");
-
-    var ericBio = document.createTextNode("orem ipsum dolor sit amet, consectetur adipiscing elit. Proin nulla ex, rutrum id tris");
-
-    document.getElementById("IdAboutUsPara").appendChild(aboutIntro);
-    document.getElementById("IdMariaInfo").appendChild(mariaBio);
-    document.getElementById("IdEricInfo").appendChild(ericBio);
-
+        var mariaBio = document.createTextNode("Maria Skibinski is a twenty-one year old attending Durham College in Ontario for Computer Programming and Analysis." +
+        "She is currently at McDonald's and has been for five years and hopes to find a job in her field. Programming is a passion," +
+        " and she just loves to work on coding project and be able to problem solve. Currently her main interest is web development " +
+        "as she finds interest in Front-end Web Development. (Working with HTML, CSS, JavaScript, Php and many more)");
+    
+        var ericBio = document.createTextNode("orem ipsum dolor sit amet, consectetur adipiscing elit. Proin nulla ex, rutrum id tris");
+    
+        document.getElementById("IdAboutUsPara").appendChild(aboutIntro);
+        document.getElementById("IdMariaInfo").appendChild(mariaBio);
+        document.getElementById("IdEricInfo").appendChild(ericBio);
+    }
+    
     /*Using only JavaScript change the Products link found in the Navbar above to Projects. */
-    document.getElementById('IdProductLink').innerText = "Project";
+
+    document.getElementById("IdProductLink").innerText = "Project";
 
     /*Using only JavaScript, add another link to the Navbar above named Human Resources,
     that sits between About Us and Contact Us. You may not hard code this in the html file
@@ -33,4 +37,4 @@ function start()
 
 }
 
-window.addEventListener( "load", start, false);
+window.addEventListener( "load", Bio, false);
