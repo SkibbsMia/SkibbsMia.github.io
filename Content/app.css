@@ -1,5 +1,10 @@
 body {
-    background-color:rgb(124, 137, 172);
+    background-image: url('../Pictures/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+    color: rgba(255, 255, 255, 0.726);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 ul {
@@ -13,19 +18,19 @@ ul {
   li {
     float: right;
     display: block;
-    color: white;
+    color: rgba(255, 255, 255, 0.726);
     text-align: center;
     padding: 14px 16px;
   }
   
   li a {
-    color: white;
+    color: rgba(255, 255, 255, 0.726);
     text-decoration: none;
   }
 
   .linkbox {
     background-color: rgb(79, 103, 170);
-    color: black;
+    color: rgba(255, 255, 255, 0.726);
     padding: 14px 25px;
     text-align: center;
     text-decoration: none;
