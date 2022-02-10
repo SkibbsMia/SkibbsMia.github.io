@@ -55,4 +55,4 @@ function Start()
     ul.insertBefore(li, document.getElementById("IdAboutList"));
 }
 
-window.addEventListener( "DOMContentLoaded", Start, false);
+window.addEventListener( "load", Start, false);
