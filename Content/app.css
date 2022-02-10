@@ -22,3 +22,12 @@ ul {
     color: white;
     text-decoration: none;
   }
+
+  .linkbox {
+    background-color: rgb(79, 103, 170);
+    color: black;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
