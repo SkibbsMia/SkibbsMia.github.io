@@ -24,13 +24,13 @@ function start()
     document.getElementById("IdEricInfo").appendChild(ericBio);
 
     /*Using only JavaScript change the Products link found in the Navbar above to Projects. */
-    document.getElementById('IdProduct').innerText = "Project";
+    document.getElementById('IdProductLink').innerText = "Project";
+
+    /*Using only JavaScript, add another link to the Navbar above named Human Resources,
+    that sits between About Us and Contact Us. You may not hard code this in the html file
+    this must be done using DOM manipulation. Ensure that you also include an appropriate
+    font-icon using Font-Awesome */
 
 }
 
 window.addEventListener( "load", start, false);
-
-/*Using only JavaScript, add another link to the Navbar above named Human Resources,
-that sits between About Us and Contact Us. You may not hard code this in the html file
-this must be done using DOM manipulation. Ensure that you also include an appropriate
-font-icon using Font-Awesome */
