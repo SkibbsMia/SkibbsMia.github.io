@@ -25,12 +25,36 @@ function Start()
         document.getElementById("IdMariaInfo").appendChild(mariaBio);
         document.getElementById("IdEricInfo").appendChild(ericBio);
     }
-    else if ( window.location.pathname == "/Scripts/contact.html")
+    else if ( window.location.pathname == "/Scripts/index.html")
     {
-
+        var indexIntro = document.createTextNode("Welcome to our website! This website is dedicated to the WEBD 6201 course! This is the labs that are have to build " +
+        "off of. Currently this website is dedicated to Lab One. It has a homepage(This current tab!), Projects, Services, About Us and a Contact Us pages.");
+        document.getElementById("IdIndexParagraph").appendChild(indexIntro);
     }
+
     /*Using only JavaScript change the Products link found in the Navbar above to Projects. */
-    document.getElementById("IdProductLink").innerText = "Projects";
+
+    // Grab the current a tag for product
+    var currentAProductTag = document.getElementById("IdProductLink");
+
+    // Create new i and a tags
+    var iconForProject = document.createElement("i");
+    var newAProjectsTag = document.createElement("a");
+
+    // Set attributes to the i tag
+    iconForProject.setAttribute("class", "fa-solid fa-code");
+    iconForProject.setAttribute("style", "margin-right: 5px");
+
+    // Set attributes to the a tag
+    newAProjectsTag.setAttribute( "href", "products.html");
+    newAProjectsTag.setAttribute( "id", "IdProjects");
+
+    // Append the nodes together
+    newAProjectsTag.appendChild(iconForProject);
+    newAProjectsTag.appendChild(document.createTextNode("Projects"));
+    
+    // Replace the old a tag with the new one
+    currentAProductTag.parentNode.replaceChild(newAProjectsTag, currentAProductTag);
 
     /*Using only JavaScript, add another link to the Navbar above named Human Resources,
     that sits between About Us and Contact Us. You may not hard code this in the html file
@@ -39,19 +63,26 @@ function Start()
 
     // Find the ul in the Nav bar
     var ul = document.getElementById("IdNavList");
-
-    // Create new elements
+    
+    // Create new tags
     var li = document.createElement("li");
     var a = document.createElement("a");
+    var iTagForHumanResources = document.createElement("i");
 
     // Set attributes to the a tag
     a.setAttribute( "href", "humanResources.html");
     a.setAttribute( "id", "IdhumanResources");
+    
+    // Set attributes to the i tag
+    iTagForHumanResources.setAttribute("class", "fa-solid fa-person");
+    iTagForHumanResources.setAttribute("style", "margin-right: 5px");
 
     // Append the nodes together
+    a.appendChild(iTagForHumanResources);
     a.appendChild(document.createTextNode("Human Resources"));
     li.appendChild(a);
-    // Instert the new link in the Navbar between About Us and Contact Us
+
+    // Insert the new link in the Navbar between About Us and Contact Us
     ul.insertBefore(li, document.getElementById("IdAboutList"));
 }
 
