@@ -95,5 +95,5 @@ window.addEventListener( "load", Start, false);
 
 function outputUserInfo()
 {
-    console.log(getElementById(name));
+    console.log(getElementById("name"));
 }
