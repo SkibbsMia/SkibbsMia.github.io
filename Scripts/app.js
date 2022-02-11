@@ -22,8 +22,7 @@ function Start()
         var ericBio = document.createTextNode("Eric Fisher is currently enrolled in the Computer Programming Diploma Program at Durham College." +
         " He previously graduated the Computer Foundations certificate program in 2020." +
         " He currently works as a Retail Sales Associate in the telecommunications industry. Prior to that he worked in the restaurant industry for over 10 years" +
-        " in several positions, most notably as a host and food server. Eric considers himself to be an adaptive and creative problem-solver and hopes to" +
-        "work in a variety of roles over the course of his career.");
+        " in several positions, most notably as a host and food server. Eric considers himself to be an adaptive and creative problem-solver.");
     
         document.getElementById("IdAboutUsPara").appendChild(aboutIntro);
         document.getElementById("IdMariaInfo").appendChild(mariaBio);
