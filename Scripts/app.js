@@ -95,5 +95,13 @@ window.addEventListener( "load", Start, false);
 
 function outputUserInfo()
 {
-    console.log(getElementById("name"));
+    let output = ("Full Name: " + document.getElementById("name").value) + "\n" + "Phone Number: " + (document.getElementById("number").value) + "\n" + "Email Address: " + (document.getElementById("email").value) + "\n" + "Short Message: " + (document.getElementById("message").value);
+    console.log(output);
+    window.location.href = ("/index.html");
+}
+
+//Redirects user to home page after 3 seconds of clicking submit button on contact form.
+function backToHome()
+{
+    window.location.href = '/index.html';
 }
