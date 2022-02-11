@@ -91,3 +91,10 @@ function Start()
 }
 
 window.addEventListener( "load", Start, false);
+
+//Function called when Contact form is submitted
+
+function outputUserInfo()
+{
+    console.log(getElementById(name));
+}
