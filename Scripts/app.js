@@ -15,11 +15,15 @@ function Start()
         var aboutIntro = document.createTextNode("Information about the people who created this website.");
 
         var mariaBio = document.createTextNode("Maria Skibinski is a twenty-one year old attending Durham College in Ontario for Computer Programming and Analysis." +
-        "She is currently at McDonald's and has been for five years and hopes to find a job in her field. Programming is a passion," +
+        " She is currently at McDonald's and has been for five years and hopes to find a job in her field. Programming is a passion," +
         " and she just loves to work on coding project and be able to problem solve. Currently her main interest is web development " +
         "as she finds interest in Front-end Web Development. (Working with HTML, CSS, JavaScript, Php and many more)");
     
-        var ericBio = document.createTextNode("orem ipsum dolor sit amet, consectetur adipiscing elit. Proin nulla ex, rutrum id tris");
+        var ericBio = document.createTextNode("Eric Fisher is currently enrolled in the Computer Programming Diploma Program at Durham College." +
+        " He previously graduated the Computer Foundations certificate program in 2020." +
+        " He currently works as a Retail Sales Associate in the telecommunications industry. Prior to that he worked in the restaurant industry for over 10 years" +
+        " in several positions, most notably as a host and food server. Eric considers himself to be an adaptive and creative problem-solver and hopes to" +
+        "work in a variety of roles over the course of his career.");
     
         document.getElementById("IdAboutUsPara").appendChild(aboutIntro);
         document.getElementById("IdMariaInfo").appendChild(mariaBio);
