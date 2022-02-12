@@ -71,9 +71,9 @@ function ProjectsPageInfo()
 
     var projectOne = document.createTextNode("This project is a functional BMI calculator. The website uses a responsive layout, and was built with HTML, CSS, Javascript.");
     
-    var projectTwo = document.createTextNode("project two desc");
+    var projectTwo = document.createTextNode("This is a Lab created with .Net framework and C#. This Lab was showing how we can connect a database to a website in .net. It was fully functional and even had a sign in page.");
 
-    var projectThree = document.createTextNode("project three desc");
+    var projectThree = document.createTextNode("This is a Activity Diagram that was created for a made-up library application. It was done by using Visio and having a knowledgeable background in System Development.");
 
     document.getElementById("projectsIntroPara").appendChild(projectsIntro);
     document.getElementById("projectOnePara").appendChild(projectOne);
@@ -82,7 +82,7 @@ function ProjectsPageInfo()
 }
 function ServicesPageInfo()
 {
-    var servicesIntro = document.createTextNode("service intro");
+    var servicesIntro = document.createTextNode("There are 3 services we offer. They are:");
 
     var serviceOne = document.createTextNode("service one desc");
     
