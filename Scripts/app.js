@@ -28,12 +28,50 @@ function Start()
         document.getElementById("IdMariaInfo").appendChild(mariaBio);
         document.getElementById("IdEricInfo").appendChild(ericBio);
     }
+
+    //Text for the home page
     else if ( window.location.pathname == "/Scripts/index.html")
     {
         var indexIntro = document.createTextNode("Welcome to our website! This website is dedicated to the WEBD 6201 course! This is the labs that are have to build " +
         "off of. Currently this website is dedicated to Lab One. It has a homepage(This current tab!), Projects, Services, About Us and a Contact Us pages.");
         document.getElementById("IdIndexParagraph").appendChild(indexIntro);
     }
+
+    //Text for the projects page
+    else if ( window.location.pathname == "/Scripts/products.html")
+    {
+        var projectsIntro = document.createTextNode("projects intro");
+
+        var projectOne = document.createTextNode("project one desc");
+        
+        var projectTwo = document.createTextNode("project two desc");
+
+        var projectThree = document.createTextNode("project three desc");
+
+        document.getElementById("projectsIntroPara").appendChild(projectsIntro);
+        document.getElementById("projectOnePara").appendChild(projectOne);
+        document.getElementById("projectTwoPara").appendChild(projectTwo);
+        document.getElementById("projectThreePara").appendChild(projectThree);
+    }
+
+
+    //Text for the services page
+    else if ( window.location.pathname == "/Scripts/services.html")
+    {
+        var servicesIntro = document.createTextNode("service intro");
+
+        var serviceOne = document.createTextNode("service one desc");
+        
+        var serviceTwo = document.createTextNode("service two desc");
+
+        var serviceThreeThree = document.createTextNode("service three desc");
+
+        document.getElementById("serviesIntroPara").appendChild(servicesIntro);
+        document.getElementById("serviceOnePara").appendChild(serviceOne);
+        document.getElementById("serviceTwoPara").appendChild(serviceTwo);
+        document.getElementById("serviceThreePara").appendChild(serviceThree);
+    }
+
 
     /*Using only JavaScript change the Products link found in the Navbar above to Projects. */
 
