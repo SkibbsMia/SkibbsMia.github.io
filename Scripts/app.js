@@ -31,7 +31,7 @@ function Start()
     {
         document.getElementById("IdContactForm").addEventListener("submit", ContactFormSubmit, false);
     }
-    
+
     ProductToProject();
 
     HumanResouceNav();
@@ -88,11 +88,11 @@ function ServicesPageInfo()
     
     var serviceTwo = document.createTextNode("We offer web development services. We are able to implement a variety of programming languages and tools, including, but not limited to HTML, CSS, Javascript/Jquery, SQL, PHP, C#, and more.");
 
-    var serviceThreeThree = document.createTextNode("We offer systems and analysis and development services. We are able to use UML and other methods to effectively analyze existing systems and develop new systems.");
+    var serviceThree = document.createTextNode("We offer systems and analysis and development services. We are able to use UML and other methods to effectively analyze existing systems and develop new systems.");
 
-    document.getElementById("serviesIntroPara").appendChild(servicesIntro);
+    document.getElementById("introServices").appendChild(servicesIntro);
     document.getElementById("serviceOnePara").appendChild(serviceOne);
-    document.getElementById("serviceTwoPara").appendChild(serviceTwo);
+    document.getElementById("serviceTwoPAra").appendChild(serviceTwo);
     document.getElementById("serviceThreePara").appendChild(serviceThree);
 }
 
