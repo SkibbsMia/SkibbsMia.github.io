@@ -1,7 +1,7 @@
 /*
 Names: Maria Skibinski, Eric Fisher
-Student IDs: *********, 100481944
-Date Completed: February 10th, 2022
+Student IDs: 100780302, 100481944
+Date Completed: February 11th, 2022
 */
 
 function Start()
@@ -84,11 +84,11 @@ function ServicesPageInfo()
 {
     var servicesIntro = document.createTextNode("There are 3 services we offer. They are:");
 
-    var serviceOne = document.createTextNode("service one desc");
+    var serviceOne = document.createTextNode("We offer database development services. We are experienced with tools, such as Microsoft Access and SQL and are able to assist with database development from planning and design to implementation.");
     
-    var serviceTwo = document.createTextNode("service two desc");
+    var serviceTwo = document.createTextNode("We offer web development services. We are able to implement a variety of programming languages and tools, including, but not limited to HTML, CSS, Javascript/Jquery, SQL, PHP, C#, and more.");
 
-    var serviceThreeThree = document.createTextNode("service three desc");
+    var serviceThreeThree = document.createTextNode("We offer systems and analysis and development services. We are able to use UML and other methods to effectively analyze existing systems and develop new systems.");
 
     document.getElementById("serviesIntroPara").appendChild(servicesIntro);
     document.getElementById("serviceOnePara").appendChild(serviceOne);
