@@ -91,22 +91,11 @@ function Start()
 
 window.addEventListener( "load", Start, false);
 
-//Function called when Contact form is submitted
+//Function is called when submit button is pressed and outputs user information to console
 
 function outputUserInfo()
 {
     let output = ("Full Name: " + document.getElementById("name").value) + "\n" + "Phone Number: " + (document.getElementById("number").value) + "\n" + "Email Address: " + (document.getElementById("email").value) + "\n" + "Short Message: " + (document.getElementById("message").value);
     console.log(output);
-    alert(output);
 }
 
-//Redirects user to home page after 3 seconds of clicking submit button on contact form.
-function countdown()
-{
-    setTimeout(outputUserInfo, 4000);
-}
-
-function backToHome()
-{
-    window.location.href("http://www.w3schools.com");
-}
