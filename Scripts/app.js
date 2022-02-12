@@ -67,9 +67,9 @@ function IndexPageInfo()
 
 function ProjectsPageInfo()
 {
-    var projectsIntro = document.createTextNode("projects intro");
+    var projectsIntro = document.createTextNode("This page features an image and brief summary of 3 of our favourite projects.");
 
-    var projectOne = document.createTextNode("project one desc");
+    var projectOne = document.createTextNode("This project is a functional BMI calculator. The website uses a responsive layout, and was built with HTML, CSS, Javascript.");
     
     var projectTwo = document.createTextNode("project two desc");
 
