@@ -27,24 +27,24 @@
         </ul>
     </header>
 
-    <h1>Services</h1>
-    <p id="introServices"></p>
-    <div>
-        <h2>Database Development</h2>
-        <img src="../Pictures/database.png" alt="Database image" style="height: 400px; width: 400px;">
-        <p id="serviceOnePara"></p>
+    <div class="container rounded">
+        <h1>Login</h1>
+        <form id="IdLoginForm">
+            <div class="input-group mb-3">
+                <label for="usernameInput" class="input-group-text"><i class="fa-solid fa-user"></i></label>
+                <input type="text" class="form-control" placeholder="Enter Your Username" id="usernameInput">
+            </div>
+            <div class="input-group mb-3">
+                <label for="passwordInput" class="input-group-text"><i class="fa-solid fa-lock"></i></label>
+                <input type="password" class="form-control" placeholder="Enter Your Password" id="passwordInput">
+            </div>
+            <div class="d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary" id="buttonLogin">Login</button>
+            </div>
+        </form>
+        <br />
+        <p>Don't have an account? <a id="IdRegisterLink" href="register.html">Register Here!</a></p>
     </div>
-    <div>
-        <h2>Web Development</h2>
-        <img src="../Pictures/webdev.png" alt="Web development image" style="height: 400px; width: 400px;">
-        <p id="serviceTwoPAra"></p>
-    </div>
-    <div>
-        <h2>System Analysis</h2>
-        <img src="../Pictures/systems.jpg" alt="" style="height: 400px; width: 400px;">
-        <p id="serviceThreePara"></p>
-    </div>
-
 </body>
 
 </html>

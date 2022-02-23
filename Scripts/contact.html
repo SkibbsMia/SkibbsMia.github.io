@@ -1,46 +1,56 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Contact Page</title>
-        <link rel = "stylesheet" type = "text/css" href = "../Content/app.css">
-        <script src="https://kit.fontawesome.com/4c3ba8e396.js" crossorigin="anonymous"></script>
-        <script src = "app.js"></script>
-    </head>
-    <body>
-        <ul id = "IdNavList">
-            <li style="float:left">WEBD6201 - Lesson 1</li>
-            <li><a id = "IdContactLink" href="contact.html"><i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>Contact Us</a></li>
-            <li id = "IdAboutList"><a id = "IdAboutLink" href="about.html"><i class="fa-solid fa-circle-question" style="margin-right: 5px;"></i>About Us</a></li>
-            <li><a id = "IdServicesLink" href="services.html"><i class="fa-solid fa-bell" style="margin-right: 5px;"></i>Services</a></li>
-            <li><a id = "IdProductLink" href="products.html"><i class="fa-solid fa-display-code" style="margin-right: 5px;"></i>Products</a></li>
-            <li><a id = "IdIndexLink" href="index.html"><i class="fa-solid fa-house" style="margin-right: 5px;"></i>Home</a></li>
-          </ul>
 
+<head>
+    <meta charset="utf-8">
+    <title>Contact Page</title>
+    <script src="https://kit.fontawesome.com/4c3ba8e396.js" crossorigin="anonymous"></script>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../Content/app.css">
+    <script src="app.js"></script>
+</head>
 
-        <h1>Contact Us</h1>
-        <form id = "IdContactForm">
-            <table>
-                <tr>
-                    <td><label for="name">Full Name:</label></td>
-                    <td><input type="text" id="name"></td>
-                </tr>
-                <tr>
-                    <td><label for="contactNumber">Contact Number:</label></td>
-                    <td><input type="text" id="number"></td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email:</label></td>
-                    <td><input type="text" id="email"></td>
-                </tr>
-                <tr>
-                    <td><label for="shortMessage">Short Message:</label></td>
-                    <td><textarea id="message" rows="3"></textarea></td>
-                </tr>
-                <tr>
-                    <td><button type = "submit">Submit</button></td>
-                </tr>
-            </table>          
-        </form>
-    </body>
-</html> 
+<body>
+    <header class="d-flex mb-4">
+        <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto">WEBD6201 - Lesson 1</span>
+        <ul class="nav justify-content-end" id="IdNavList">
+            <li class="nav-item"><a id="IdIndexLink" href="index.html"><i class="fa-solid fa-house"
+                        style="margin-right: 5px;"></i>Home</a></li>
+            <li class="nav-item"><a id="IdProductLink" href="products.html"><i class="fa-solid fa-display-code"
+                        style="margin-right: 5px;"></i>Products</a></li>
+            <li class="nav-item"><a id="IdServicesLink" href="services.html"><i class="fa-solid fa-bell"
+                        style="margin-right: 5px;"></i>Services</a></li>
+            <li class="nav-item" id="IdAboutList"><a id="IdAboutLink" href="about.html"><i
+                        class="fa-solid fa-circle-question" style="margin-right: 5px;"></i>About Us</a></li>
+            <li class="nav-item" id="IdContactList"><a id="IdContactLink" href="contact.html"><i
+                        class="fa-solid fa-address-card" style="margin-right: 5px;"></i>Contact Us</a></li>
+        </ul>
+    </header>
+
+    <h1>Contact Us</h1>
+    <form id="IdContactForm">
+        <table>
+            <tr>
+                <td><label for="name">Full Name:</label></td>
+                <td><input type="text" id="name"></td>
+            </tr>
+            <tr>
+                <td><label for="contactNumber">Contact Number:</label></td>
+                <td><input type="text" id="number"></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="text" id="email"></td>
+            </tr>
+            <tr>
+                <td><label for="shortMessage">Short Message:</label></td>
+                <td><textarea id="message" rows="3"></textarea></td>
+            </tr>
+            <tr>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

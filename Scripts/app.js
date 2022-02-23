@@ -138,6 +138,9 @@ function HumanResouceNav()
     var a = document.createElement("a");
     var iTagForHumanResources = document.createElement("i");
 
+    // Set attributes to the li tag
+    li.setAttribute("class", "nav-item");
+
     // Set attributes to the a tag
     a.setAttribute( "href", "humanResources.html");
     a.setAttribute( "id", "IdhumanResources");
@@ -152,7 +155,7 @@ function HumanResouceNav()
     li.appendChild(a);
 
     // Insert the new link in the Navbar between About Us and Contact Us
-    ul.insertBefore(li, document.getElementById("IdAboutList"));
+    ul.insertBefore(li, document.getElementById("IdContactList"));
 
 }
 
