@@ -174,3 +174,85 @@ function ContactFormSubmit(e)
     }, 3000);
     return false;
 }
+
+/* when the user enters a username and 
+password and then clicks the Login button, insert their username between the Contact 
+Us link and the Login/Logout link. Ensure you allow for appropriate spacing between the 
+two other list items (Hint: take a look at the navbar-text class on the bootstrap website 
+for appropriate styling). */ 
+function UsernameNav()
+{
+    // Find the ul in the Nav bar
+    var ul = document.getElementById("IdNavList");
+    
+    // Create new tags
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    var iTagForUsername = document.createElement("i");
+
+    // Set attributes to the li tag
+    li.setAttribute("class", "nav-item");
+
+    // Set attributes to the a tag
+    a.setAttribute( "href", "index.html");
+    a.setAttribute( "id", "IdUserName");
+    
+    // Set attributes to the i tag
+    iTagForUsername.setAttribute("class", "fa-solid fa-person");
+    iTagForUsername.setAttribute("style", "margin-right: 5px");
+
+    // Append the nodes together
+    a.appendChild(iTagForUsername);
+    a.appendChild(document.createTextNode(document.getElementById("usernameInput").value));
+    li.appendChild(a);
+
+    // Insert the new link in the Navbar between Contact and Login/Logout link
+    ul.insertBefore(li, document.getElementById("IdLogin"));
+}
+
+
+/*
+Create a div element with an id of 
+“ErrorMessage”. This div element should be hidden when the user first navigates to the 
+register.html page. This area will be used to display errors if the user enters invalid data 
+in the input fields of the registerForm. When the error clears, this div element should 
+be hidden.
+*/
+function DisplayRegistrationErrors()
+{
+
+}
+
+/*
+ensure when the user enters their First 
+Name and Last Name that the minimum length that each input element will allow is 2 
+characters. If the user violates this check, display an error message in the div element 
+with an id of “ErrorMessage”
+*/
+
+function DisplayRegistrationErrors()
+{
+
+}
+
+/*
+Create a div element with an id of 
+“ErrorMessage”. This div element should be hidden when the user first navigates to the 
+register.html page. This area will be used to display errors if the user enters invalid data 
+in the input fields of the registerForm. When the error clears, this div element should 
+be hidden.
+*/
+
+function DisplayRegistrationErrors()
+{
+
+}
+
+$(document).ready(function() 
+{
+    $("#buttonLogin").click(function() 
+    {
+        UsernameNav();
+	});
+
+});
