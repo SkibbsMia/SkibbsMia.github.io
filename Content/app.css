@@ -7,7 +7,7 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-ul {
+ul, header {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -23,7 +23,7 @@ ul {
     padding: 14px 16px;
   }
   
-  li a {
+  li a, li a:hover {
     color: rgba(255, 255, 255, 0.726);
     text-decoration: none;
   }
@@ -35,4 +35,12 @@ ul {
     text-align: center;
     text-decoration: none;
     display: inline-block;
+  }
+
+  .container{
+    margin: auto;
+    width: 50%;
+    padding: 25px;
+    background-color: #333;
+    text-align: center;
   }

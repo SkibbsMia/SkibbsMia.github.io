@@ -34,24 +34,34 @@
         </ul>
     </header>
 
-    <h1>Services</h1>
-    <p id="introServices"></p>
-    <div>
-        <h2>Database Development</h2>
-        <img src="../Pictures/database.png" alt="Database image" style="height: 400px; width: 400px;">
-        <p id="serviceOnePara"></p>
+    <div class="container rounded">
+        <h1>Register</h1>
+        <p>Create your own account, It's free and only takes a minute.</p>
+        <form id="IdRegisterForm">
+            <div class="row mb-3">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="First Name">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="emailInput" placeholder="Email">
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" id="passwordRegisterInput" placeholder="Password">
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" id="passwordConfirmInput" placeholder="Confirm Password">
+            </div>
+            <div class="d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary" id="buttonRegister">Register</button>
+            </div>
+        </form>
+        <br />
+        <p>Already have an account? <a id=" IdRegisterLink" href="login.html">Sign in</a></p>
     </div>
-    <div>
-        <h2>Web Development</h2>
-        <img src="../Pictures/webdev.png" alt="Web development image" style="height: 400px; width: 400px;">
-        <p id="serviceTwoPAra"></p>
-    </div>
-    <div>
-        <h2>System Analysis</h2>
-        <img src="../Pictures/systems.jpg" alt="" style="height: 400px; width: 400px;">
-        <p id="serviceThreePara"></p>
-    </div>
-
 </body>
 
 </html>
