@@ -180,7 +180,7 @@ password and then clicks the Login button, insert their username between the Con
 Us link and the Login/Logout link. Ensure you allow for appropriate spacing between the 
 two other list items (Hint: take a look at the navbar-text class on the bootstrap website 
 for appropriate styling). */ 
-function UsernameNav()
+function UsernameNav(username)
 {
     // Find the ul in the Nav bar
     var ul = document.getElementById("IdNavList");
@@ -194,16 +194,16 @@ function UsernameNav()
     li.setAttribute("class", "nav-item");
 
     // Set attributes to the a tag
-    a.setAttribute( "href", "index.html");
+    a.setAttribute( "href", "login.html");
     a.setAttribute( "id", "IdUserName");
     
     // Set attributes to the i tag
-    iTagForUsername.setAttribute("class", "fa-solid fa-person");
+    iTagForUsername.setAttribute("class", "fa-solid");
     iTagForUsername.setAttribute("style", "margin-right: 5px");
 
     // Append the nodes together
     a.appendChild(iTagForUsername);
-    a.appendChild(document.createTextNode(document.getElementById("usernameInput").value));
+    a.appendChild(document.createTextNode(username));
     li.appendChild(a);
 
     // Insert the new link in the Navbar between Contact and Login/Logout link
@@ -250,8 +250,11 @@ function DisplayRegistrationErrors()
 
 $(document).ready(function() 
 {
+
+    
     $("#buttonLogin").click(function() 
     {
+        let loginName = document.getElementById("usernameInput").value;
         UsernameNav();
 	});
 
