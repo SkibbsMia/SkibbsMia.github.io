@@ -186,6 +186,13 @@ function ContactFormSubmit(e) {
 
 var username = "";
 
+// Grabs the current session username and creates a tag into the nav.
+function UsernameNav() {
+    username = sessionStorage.getItem('username');
+
+    $('#IdContactList').after('<li class="nav-text" id="IdUserNameList">' + username + '</li>');
+}
+
 $(document).ready(function () {
 
     //Login - When the login/logout link gets clicked, checks if 
@@ -229,13 +236,6 @@ $(document).ready(function () {
     $("#passwordConfirmInput").keyup(function () {
         validateConfirmation();
     })
-
-    // Grabs the current session username and creates a tag into the nav.
-    function UsernameNav() {
-        username = sessionStorage.getItem('username');
-    
-        $('#IdContactList').after('<li class="nav-text" id="IdUserNameList">' + username + '</li>');
-    }
 
     //Register - If first name or last name are shorter than 2 characters, display appropriate error
     function validateFirstName() {
