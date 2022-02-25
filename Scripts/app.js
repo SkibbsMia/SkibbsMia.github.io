@@ -1,21 +1,22 @@
 /*
+Names: Maria Skibinski, Eric Fisher
+Student IDs: 100780302, 100481944
+Date Completed: February 24th, 2022
+*/
+
+/*
 Create a JavaScript Class named User, in the same file (app.js) but above the 
 IIFE that includes firstName, lastName, username, email and password properties.
 */
 class User {
-    constructor(firstName, lastName, email, password) {
+    constructor(firstName, lastName, username, email, password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
         this.email = email;
         this.password = password;
     }
 }
-
-/*
-Names: Maria Skibinski, Eric Fisher
-Student IDs: 100780302, 100481944
-Date Completed: February 11th, 2022
-*/
 
 function Start() {
     // Text for the about page
@@ -369,7 +370,9 @@ $(document).ready(function () {
             let email = $("#emailInput").val();
             let password = $('#passwordRegisterInput').val();
 
-            var userInstance = new User(firstName, lastName, email, password);
+            let username = firstName.substring(0, 2) + '.' + lastName.substring(0, 2);
+
+            var userInstance = new User(firstName, lastName, username, email, password);
 
             console.log(userInstance);
 
@@ -382,16 +385,4 @@ $(document).ready(function () {
             $("#ErrorMessage").hide();
         }
     });
-
-    //When register button is clicked an instance of the user class is created and displayed in the console
-    $("#buttonRegister").click(e)
-    {
-        e.preventDefault();
-
-        let username = firstName.value.substring(0, 4) + lastName.value.substring(0, 2);
-        let newUser = new User(firstName, lastName, username, email, password);
-
-        console.log(newUser);
-    }
-
 });
