@@ -1,4 +1,20 @@
 /*
+Create a JavaScript Class named User, in the same file (app.js) but above the 
+IIFE that includes firstName, lastName, username, email and password properties.
+*/
+class User
+{
+    constructor(firstName, lastName, username, email, password)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+}
+
+/*
 Names: Maria Skibinski, Eric Fisher
 Student IDs: 100780302, 100481944
 Date Completed: February 11th, 2022
@@ -175,87 +191,135 @@ function ContactFormSubmit(e)
     return false;
 }
 
-/* when the user enters a username and 
-password and then clicks the Login button, insert their username between the Contact 
-Us link and the Login/Logout link. Ensure you allow for appropriate spacing between the 
-two other list items (Hint: take a look at the navbar-text class on the bootstrap website 
-for appropriate styling). */ 
-function UsernameNav(username)
-{
-    // Find the ul in the Nav bar
-    var ul = document.getElementById("IdNavList");
-    
-    // Create new tags
-    var li = document.createElement("li");
-    var a = document.createElement("a");
-    var iTagForUsername = document.createElement("i");
-
-    // Set attributes to the li tag
-    li.setAttribute("class", "nav-item");
-
-    // Set attributes to the a tag
-    a.setAttribute( "href", "login.html");
-    a.setAttribute( "id", "IdUserName");
-    
-    // Set attributes to the i tag
-    iTagForUsername.setAttribute("class", "fa-solid");
-    iTagForUsername.setAttribute("style", "margin-right: 5px");
-
-    // Append the nodes together
-    a.appendChild(iTagForUsername);
-    a.appendChild(document.createTextNode(username));
-    li.appendChild(a);
-
-    // Insert the new link in the Navbar between Contact and Login/Logout link
-    ul.insertBefore(li, document.getElementById("IdLogin"));
-}
-
-
-/*
-Create a div element with an id of 
-“ErrorMessage”. This div element should be hidden when the user first navigates to the 
-register.html page. This area will be used to display errors if the user enters invalid data 
-in the input fields of the registerForm. When the error clears, this div element should 
-be hidden.
-*/
-function DisplayRegistrationErrors()
-{
-
-}
-
-/*
-ensure when the user enters their First 
-Name and Last Name that the minimum length that each input element will allow is 2 
-characters. If the user violates this check, display an error message in the div element 
-with an id of “ErrorMessage”
-*/
-
-function DisplayRegistrationErrors()
-{
-
-}
-
-/*
-Create a div element with an id of 
-“ErrorMessage”. This div element should be hidden when the user first navigates to the 
-register.html page. This area will be used to display errors if the user enters invalid data 
-in the input fields of the registerForm. When the error clears, this div element should 
-be hidden.
-*/
-
-function DisplayRegistrationErrors()
-{
-
-}
 
 $(document).ready(function() 
 {
 
-    
+    //Login - When login button is submitted, add username to nav-bar between login/logout
     $("#buttonLogin").click(function() 
     {
-        let loginName = document.getElementById("usernameInput").value;
-        UsernameNav();
+        
 	});
+
+    //Register - Create a div element with id = ErrorMessage
+    $("<div id = 'ErrorMessage'></div>").insertAfter("#IdRegisterForm");
+
+    //Hide Error Message
+    $("#ErrorMessage").hide();
+    let inputError = true;
+
+    $("#firstNameInput").keyup(function (){
+        validateFirstName();
+    });
+    $("#lastNameInput").keyup(function (){
+        validateLastName();
+    });
+    $("#emailInput").keyup(function (){
+        validateEmail();
+    })
+    $("#passwordRegisterInput").keyup(function (){
+        validatePassword();
+    });
+    $("#passwordConfirmInput").keyup(function (){
+        validateConfirmation();
+    })
+
+
+    //Register - If first name or last name are shorter than 2 characters, display appropriate error
+    function validateFirstName()
+    {
+        let firstName = $("#firstNameInput").val();
+        if (firstName.length < 2)
+        {
+            $("#ErrorMessage").show();
+            $("#ErrorMessage").html("<br>First name must have at least 2 characters.");
+            inputError = false;
+            return false;
+        }
+        else
+        {
+            $("#ErrorMessage").hide();
+        }
+    }
+
+    function validateLastName()
+    {
+        let lastName = $("#lastNameInput").val();
+        if (lastName.length < 2)
+        {
+            $("#ErrorMessage").show();
+            $("#ErrorMessage").html("<br>Last name must have at least 2 characters.");
+            inputError = false;
+            return false;
+        }
+        else
+        {
+            $("#ErrorMessage").hide();
+        }
+    }
+    
+
+    //Register - If email does not have at least 8 characters and contain an @ symbol, display appropriate error
+    function validateEmail()
+    {
+        let email = $("#emailInput").val();
+        if (email.length < 8)
+        {
+            $("#ErrorMessage").show();
+            $("#ErrorMessage").html("<br>Email must contain at least 8 characters.")
+            inputError = false;
+            return false;
+        }
+        else if (email.includes('@'))
+        {
+            $("ErrorMessage").hide()
+        }
+        else
+        {
+            $("#ErrorMessage").show();
+            $("#ErrorMessage").html("<br>Email must contain '@' symbol.")
+            inputError = false;
+            return false;      
+        }
+    }
+    
+
+    //Register - If password is less than 6 characters and does not match confirm password field, display error
+    function validatePassword()
+    {
+        let password = $("#passwordRegisterInput").val();
+        if (email.length < 6)
+        {
+            $("#ErrorMessage").show();
+            $("#ErrorMessage").html("<br>Password must contain at least 6 characters.")
+            inputError = false;
+            return false;
+        }
+        else
+        {
+            $("#ErrorMessage").hide();
+        }
+    }
+    function validateConfirmation()
+    {
+        let password = $("#passwordRegisterInput").val();
+        let confirmation = $("#passwordConfirmInput").val();
+        if (password != confirmation)
+        {
+            $("#ErrorMessage").show();
+            $("#ErrorMessage").html("<br>Password and Confirmation Password must match.")
+            inputError = false;
+            return false;
+        }
+        else
+        {
+            $("#ErrorMessage").hide();
+        }
+    }
+    //Register When user clicks on register button - Prevent default form behaviour
+
+
+
+    //Register - When form is submitted create instance of User class and display to the console.
 
 });
