@@ -383,4 +383,15 @@ $(document).ready(function () {
         }
     });
 
+    //When register button is clicked an instance of the user class is created and displayed in the console
+    $("#buttonRegister").click(e)
+    {
+        e.preventDefault();
+
+        let username = firstName.value.substring(0, 4) + lastName.value.substring(0, 2);
+        let newUser = new User(firstName, lastName, username, email, password);
+
+        console.log(newUser);
+    }
+
 });
