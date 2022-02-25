@@ -3,10 +3,9 @@ Create a JavaScript Class named User, in the same file (app.js) but above the
 IIFE that includes firstName, lastName, username, email and password properties.
 */
 class User {
-    constructor(firstName, lastName, username, email, password) {
+    constructor(firstName, lastName, email, password) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
         this.email = email;
         this.password = password;
     }
@@ -219,48 +218,61 @@ $(document).ready(function () {
 
     //Hide Error Message
     $("#ErrorMessage").hide();
-    let inputError = true;
-
+    let firstNameError = true;
     $("#firstNameInput").keyup(function () {
         validateFirstName();
     });
+    let lastNameError = true;
     $("#lastNameInput").keyup(function () {
         validateLastName();
     });
+    let emailError = true;
     $("#emailInput").keyup(function () {
         validateEmail();
-    })
+    });
+    let passwordError = true;
     $("#passwordRegisterInput").keyup(function () {
         validatePassword();
     });
+    let confirmationError = true;
     $("#passwordConfirmInput").keyup(function () {
         validateConfirmation();
-    })
+    });
 
     //Register - If first name or last name are shorter than 2 characters, display appropriate error
     function validateFirstName() {
         let firstName = $("#firstNameInput").val();
         if (firstName.length < 2) {
-            $("#ErrorMessage").show();
-            $("#ErrorMessage").html("<br>First name must have at least 2 characters.");
-            inputError = false;
+            if (!$('#IdFirstNameError').length) {
+                $("#ErrorMessage").show();
+                $('#ErrorMessage').append('<p id="IdFirstNameError">First name must have at least 2 characters.</p>');
+                //$("#ErrorMessage").html("<br>First name must have at least 2 characters.");
+            }
+            firstNameError = false;
             return false;
         }
         else {
-            $("#ErrorMessage").hide();
+            firstNameError = true;
+            $('#IdFirstNameError').remove();
+            //$("#ErrorMessage").hide();
         }
     }
 
     function validateLastName() {
         let lastName = $("#lastNameInput").val();
         if (lastName.length < 2) {
-            $("#ErrorMessage").show();
-            $("#ErrorMessage").html("<br>Last name must have at least 2 characters.");
-            inputError = false;
+            if (!$('#IdLastNameError').length) {
+                $("#ErrorMessage").show();
+                $('#ErrorMessage').append('<p id="IdLastNameError">Last name must have at least 2 characters.</p>');
+                //$("#ErrorMessage").html("<br>Last name must have at least 2 characters.");
+            }
+            lastNameError = false;
             return false;
         }
         else {
-            $("#ErrorMessage").hide();
+            lastNameError = true;
+            $('#IdLastNameError').remove();
+            //$("#ErrorMessage").hide();
         }
     }
 
@@ -268,20 +280,34 @@ $(document).ready(function () {
     //Register - If email does not have at least 8 characters and contain an @ symbol, display appropriate error
     function validateEmail() {
         let email = $("#emailInput").val();
+
         if (email.length < 8) {
-            $("#ErrorMessage").show();
-            $("#ErrorMessage").html("<br>Email must contain at least 8 characters.")
-            inputError = false;
+            if (!$('#IdEmailError').length) {
+                $("#ErrorMessage").show();
+                $('#ErrorMessage').append('<p id="IdEmailError">Email must contain at least 8 characters.</p>');
+                //$("#ErrorMessage").html("<br>Email must contain at least 8 characters.")
+            }
+            emailError = false;
             return false;
-        }
-        else if (email.includes('@')) {
-            $("ErrorMessage").hide()
         }
         else {
-            $("#ErrorMessage").show();
-            $("#ErrorMessage").html("<br>Email must contain '@' symbol.")
-            inputError = false;
+            emailError = true;
+            //$("ErrorMessage").hide()
+            $('#IdEmailError').remove();
+        }
+        if (!(email.includes('@'))) {
+            if (!$('#IdEmailError').length) {
+                $("#ErrorMessage").show();
+                $('#ErrorMessage').append('<p id="IdEmailError">Email must contain "@" symbol.</p>');
+                //$("#ErrorMessage").html("<br>Email must contain '@' symbol.")
+            }
+            emailError = false;
             return false;
+        }
+        else {
+            emailError = true;
+            //$("ErrorMessage").hide()
+            $('#IdEmailError').remove();
         }
     }
 
@@ -289,33 +315,72 @@ $(document).ready(function () {
     //Register - If password is less than 6 characters and does not match confirm password field, display error
     function validatePassword() {
         let password = $("#passwordRegisterInput").val();
-        if (email.length < 6) {
-            $("#ErrorMessage").show();
-            $("#ErrorMessage").html("<br>Password must contain at least 6 characters.")
-            inputError = false;
+        if (password.length < 6) {
+            if (!$('#IdPasswordError').length) {
+                $("#ErrorMessage").show();
+                $('#ErrorMessage').append('<p id="IdPasswordError">Password must contain at least 6 characters.</p>');
+                //$("#ErrorMessage").html("<br>Password must contain at least 6 characters.")
+            }
+            passwordError = false;
             return false;
         }
         else {
-            $("#ErrorMessage").hide();
+            passwordError = true;
+            //$("#ErrorMessage").hide();
+            $('#IdPasswordError').remove();
         }
     }
     function validateConfirmation() {
         let password = $("#passwordRegisterInput").val();
         let confirmation = $("#passwordConfirmInput").val();
         if (password != confirmation) {
-            $("#ErrorMessage").show();
-            $("#ErrorMessage").html("<br>Password and Confirmation Password must match.")
-            inputError = false;
+            if (!$('#IdConfirmationError').length) {
+                $("#ErrorMessage").show();
+                $('#ErrorMessage').append('<p id="IdConfirmationError">Password and Confirmation Password must match.</p>');
+                //$("#ErrorMessage").html("<br>Password and Confirmation Password must match.")
+            }
+            confirmationError = false;
             return false;
         }
         else {
-            $("#ErrorMessage").hide();
+            confirmationError = true;
+            //$("#ErrorMessage").hide();
+            $('#IdConfirmationError').remove();
         }
     }
     //Register When user clicks on register button - Prevent default form behaviour
+    $("#IdRegisterForm").submit(function (e) {
+        e.preventDefault();
 
+        validateFirstName();
+        validateLastName();
+        validateEmail();
+        validatePassword();
+        validateConfirmation();
+        // if there is no errors create a user.
+        if ((firstNameError == true) &&
+            (lastNameError == true) &&
+            (emailError == true) &&
+            (passwordError == true) &&
+            (confirmationError == true)) {
+            //Register - When form is submitted create instance of User class and display to the console.
+            let firstName = $("#firstNameInput").val();
+            let lastName = $("#lastNameInput").val();
+            let email = $("#emailInput").val();
+            let password = $('#passwordRegisterInput').val();
 
+            var userInstance = new User(firstName, lastName, email, password);
 
-    //Register - When form is submitted create instance of User class and display to the console.
+            console.log(userInstance);
+
+        }
+    });
+
+    // Check if the Error message div is empty. if it is hide it.
+    $("#IdRegisterForm").keyup(function () {
+        if ($('#ErrorMessage').contents().length == 0) {
+            $("#ErrorMessage").hide();
+        }
+    });
 
 });
