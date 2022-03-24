@@ -47,7 +47,7 @@ function DisplayTaskList() {
         alert("Request Failed");
     } // end catch
 
-    var jasonFile = asyncRequest.responseText;
+    var jasonFile = JSON.parse(asyncRequest.responseText);
 
     console.log(jasonFile);
 }
