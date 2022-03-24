@@ -38,3 +38,5 @@ function Starting()
     getRequestObject();
     ajaxCall("taskList.json");
 }
+
+window.addEventListener("load", Starting, false);
