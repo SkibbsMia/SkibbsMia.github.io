@@ -21,35 +21,20 @@ if (!curRequest) {
     curRequest = getRequestObject();
 }
 
-function registerListerners() {
+function ajaxCall(dataURL) {
+    httpRequest.onreadystatechange = function () {
+        id(httpRequest.readyState === 4 && httpRequest.status === 200)
+        {
+            console.log(httpRequest.reponseText);
+        }
+    }
+
+    httpRequest.open("GET", dataURL, true);
+    httpRequest.send(null);
+}
+
+function Starting()
+{
     getRequestObject();
-    DisplayTaskList()
-
-    var task;
-    task = document.getElementById(" taskInputId ");
-
-}
-window.addEventListener("load", registerListerners, false);
-
-function DisplayTaskList() {
-    // attempt to create XMLHttpRequest object and make the request
-    try {
-
-        asyncRequest.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var myArr = JSON.parse(this.responseText);
-                console.log(myArr);
-            }
-        };
-
-        asyncRequest.open("GET", "../taskList.json", true); // prepare the request
-        asyncRequest.send(null); // send the request
-    } // end try
-    catch (exception) {
-        alert("Request Failed");
-    } // end catch
-}
-
-function AddNewTask() {
-
+    ajaxCall("taskList.json");
 }
