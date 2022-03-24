@@ -356,7 +356,12 @@
     if (!sessionStorage.getItem("user")) {
       // redirect back to login page
       location.href = "/login";
-      Start();
+
+      loadHeader(router.ActiveLink);
+
+      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+  
+      loadFooter();
     }
   }
 
