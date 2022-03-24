@@ -356,6 +356,7 @@
     if (!sessionStorage.getItem("user")) {
       // redirect back to login page
       location.href = "/login";
+      Start();
     }
   }
 
