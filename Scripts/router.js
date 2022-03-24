@@ -35,10 +35,12 @@ function DisplayTaskList() {
     // attempt to create XMLHttpRequest object and make the request
     try {
 
-        // register event handler
-        asyncRequest.addEventListener(
-            "readystatechange", processResponse, false);
-
+        asyncRequest.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var myArr = JSON.parse(this.responseText);
+                console.log(myArr);
+            }
+        };
 
         asyncRequest.open("GET", "../taskList.json", true); // prepare the request
         asyncRequest.send(null); // send the request
@@ -46,10 +48,6 @@ function DisplayTaskList() {
     catch (exception) {
         alert("Request Failed");
     } // end catch
-
-    var jasonFile = JSON.parse(asyncRequest.responseText);
-
-    console.log(jasonFile);
 }
 
 function AddNewTask() {
