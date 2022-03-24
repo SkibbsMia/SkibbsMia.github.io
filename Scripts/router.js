@@ -23,7 +23,7 @@ if (!curRequest) {
 
 function ajaxCall(dataURL) {
     httpRequest.onreadystatechange = function () {
-        id(httpRequest.readyState === 4 && httpRequest.status === 200)
+        if(httpRequest.readyState === 4 && httpRequest.status === 200)
         {
             console.log(httpRequest.reponseText);
         }
