@@ -1,42 +1,112 @@
-/*
-Names: Maria Skibinski, Eric Fisher
-Student IDs: 100780302, 100481944
-Date Completed: March 24th, 2022
-*/
+"use strict";
 
-let curRequest = false;
-let httpRequest;
-function getRequestObject() {
-    try {
-        httpRequest = new XMLHttpRequest();
-    }
-    catch (requestError) {
-        document.getElementById("main").innerHTML =
-            "Your browser does not support this content";
-        return false;
-    }
-    return httpRequest;
-}
-if (!curRequest) {
-    curRequest = getRequestObject();
-}
-
-function ajaxCall(dataURL) {
-    httpRequest.onreadystatechange = function () {
-        if(httpRequest.readyState === 4 && httpRequest.status === 200)
+(function (core) {
+    class Router {
+        // constructors
+        constructor() 
         {
-            console.log(httpRequest.reponseText);
+            this.ActiveLink = "";
+        }
+
+        // Public Properties (getters and setters)
+        get ActiveLink() 
+        {
+            return this.m_activeLink;
+        }
+
+        set ActiveLink(link) 
+        {
+            this.m_activeLink = link;
+        }
+
+        // Public methods
+
+        /**
+         * Adds a new route to the Routing Table
+         *
+         * @param {string} route
+         * @returns {void}
+         */
+        Add(route) 
+        {
+            this.m_routingTable.push(route);
+        }
+
+        /**
+         * This replaces the current Routing Table with a new one
+         * Routes should begin with / character
+         *
+         * @param {string} routingTable
+         * @returns {void}
+         */
+        AddTable(routingTable) 
+        {
+            this.m_routingTable = routingTable;
+        }
+
+        /**
+         * This method finds the index of the route in the routing table
+         * otherwise it returns -1 if the route is not found
+         *
+         * @param {string} route
+         * @returns {number}
+         */
+        Find(route) 
+        {
+            return this.m_routingTable.indexOf(route);
+        }
+
+        /**
+         * This method removes a route from the Routing Table
+         * It returns true if the route was successfully removed,
+         * otherwise it returns false
+         * 
+         * @param {string} route
+         * @returns {boolean}
+         */
+        Remove(route) 
+        {
+            if (this.Find(route) > -1) {
+                this.m_routingTable.splice(this.Find(route), 1);
+                return true;
+            }
+            return false;
+        }
+
+        /**
+         * This method returns the routing table as a comma-separated string 
+         *
+         * @returns {string}
+         */
+        ToString() 
+        {
+            return this.m_routingTable.toString();
         }
     }
+    core.Router = Router;
+})(core || (core = {}));
 
-    httpRequest.open("GET", dataURL, true);
-    httpRequest.send(null);
-}
+let router = new core.Router();
+router.AddTable(["/", 
+                 "/home", 
+                 "/about", 
+                 "/services", 
+                 "/contact", 
+                 "/contact-list", 
+                 "/projects", 
+                 "/register", 
+                 "/login", 
+                 "/edit"]);
+                
+let route = location.pathname; // alias for location.pathname
 
-function Starting()
+if(router.Find(route) > -1)
 {
-    getRequestObject();
-    ajaxCall("taskList.json");
+    router.ActiveLink = (route == "/") ? "home" : route.substring(1)
+}
+else
+{
+    router.ActiveLink = "404";
 }
 
-window.addEventListener("load", Starting, false);
+

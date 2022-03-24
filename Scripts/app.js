@@ -1,388 +1,551 @@
-/*
-Names: Maria Skibinski, Eric Fisher
-Student IDs: 100780302, 100481944
-Date Completed: February 24th, 2022
-*/
+/* custom JavaScript goes here */
 
-/*
-Create a JavaScript Class named User, in the same file (app.js) but above the 
-IIFE that includes firstName, lastName, username, email and password properties.
-*/
-class User {
-    constructor(firstName, lastName, username, email, password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.email = email;
-        this.password = password;
+//IIFE - Immediately Invoked Function Expression
+//AKA - Anonymous Self-Executing Function
+//Closure - limits scope leak
+
+"use strict";
+
+((core) =>
+{
+    /**
+     * Inject the Navigation bar into the Header element and highlight the active link based on the pageName parameter
+     *
+     * @param {string} pageName
+     */
+    function loadHeader(pageName)
+    {
+      // inject the Header
+      $.get("./Views/components/header.html", function(data)
+      {
+        $("header").html(data); // load the navigation bar
+
+        toggleLogin(); // add login / logout and secure links
+
+        $(`#${pageName}`).addClass("active"); // highlight active link
+
+        // loop through each anchor tag in the unordered list and 
+        // add an event listener / handler to allow for 
+        // content injection
+        $("a").on("click", function()
+        { 
+          $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
+          router.ActiveLink = $(this).attr("id");
+          loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+          $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
+          history.pushState({},"", router.ActiveLink); // this replaces the url displayed in the browser
+        });
+
+        // make it look like each nav item is an active link
+        $("a").on("mouseover", function()
+        {
+          $(this).css('cursor', 'pointer');
+        });
+      });
     }
-}
 
-function Start() {
-    // Text for the about page
-    if (window.location.pathname == "/Scripts/about.html") {
-        AboutPageInfo();
-    }
-    //Text for the home page
-    else if (window.location.pathname == "/Scripts/index.html") {
-        IndexPageInfo();
-    }
-    //Text for the projects page
-    else if (window.location.pathname == "/Scripts/products.html") {
-        ProjectsPageInfo();
-    }
-    //Text for the services page
-    else if (window.location.pathname == "/Scripts/services.html") {
-        ServicesPageInfo();
-    }
-    // Contact Form Functionality
-    else if (window.location.pathname == "/Scripts/contact.html") {
-        document.getElementById("IdContactForm").addEventListener("submit", ContactFormSubmit, false);
+    /**
+     * Inject page content in the main element 
+     *
+     * @param {string} pageName
+     * @param {function} callback
+     * @returns {void}
+     */
+    function loadContent(pageName, callback)
+    {
+      // inject content
+      $.get(`./Views/content/${pageName}.html`, function(data)
+      {
+        $("main").html(data);
+
+        callback();
+      });
+      
     }
 
-    ProductToProject();
-
-    HumanResouceNav();
-
-    // grabs the session username if there is one,
-    username = sessionStorage.getItem('username');
-
-    // if there is one then it will add it to the nav bar.
-    if (username != null) {
-        UsernameNav();
+    function loadFooter()
+    {
+      // inject the Footer
+      $.get("./Views/components/footer.html", function(data)
+      {
+        $("footer").html(data);
+      });
     }
-}
 
-window.addEventListener("load", Start, false);
+    function displayHome()
+    {
+        
+    }
 
-function AboutPageInfo() {
-    var aboutIntro = document.createTextNode("Information about the people who created this website.");
+    function displayAbout()
+    {
 
-    var mariaBio = document.createTextNode("Maria Skibinski is a twenty-one year old attending Durham College in Ontario for Computer Programming and Analysis." +
-        " She is currently at McDonald's and has been for five years and hopes to find a job in her field. Programming is a passion," +
-        " and she just loves to work on coding project and be able to problem solve. Currently her main interest is web development " +
-        "as she finds interest in Front-end Web Development. (Working with HTML, CSS, JavaScript, Php and many more)");
+    }
 
-    var ericBio = document.createTextNode("Eric Fisher is currently enrolled in the Computer Programming Diploma Program at Durham College." +
-        " He previously graduated the Computer Foundations certificate program in 2020." +
-        " He currently works as a Retail Sales Associate in the telecommunications industry. Prior to that he worked in the restaurant industry for over 10 years" +
-        " in several positions, most notably as a host and food server. Eric considers himself to be an adaptive and creative problem-solver.");
+    function displayProjects()
+    {
 
-    document.getElementById("IdAboutUsPara").appendChild(aboutIntro);
-    document.getElementById("IdMariaInfo").appendChild(mariaBio);
-    document.getElementById("IdEricInfo").appendChild(ericBio);
-}
+    }
 
-function IndexPageInfo() {
-    var indexIntro = document.createTextNode("Welcome to our website! This website is dedicated to the WEBD 6201 course! This is the labs that are have to build " +
-        "off of. Currently this website is dedicated to Lab One. It has a homepage(This current tab!), Projects, Services, About Us and a Contact Us pages.");
-    document.getElementById("IdIndexParagraph").appendChild(indexIntro);
-}
+    function displayServices()
+    {
 
-function ProjectsPageInfo() {
-    var projectsIntro = document.createTextNode("This page features an image and brief summary of 3 of our favourite projects.");
+    }
 
-    var projectOne = document.createTextNode("This project is a functional BMI calculator. The website uses a responsive layout, and was built with HTML, CSS, Javascript.");
+    function testFullName()
+    {
+      let messageArea = $("#messageArea").hide();
+      let fullNamePattern = /([A-Z][a-z]{1,25})+(\s|,|-)([A-Z][a-z]{1,25})+(\s|,|-)*/;
 
-    var projectTwo = document.createTextNode("This is a Lab created with .Net framework and C#. This Lab was showing how we can connect a database to a website in .net. It was fully functional and even had a sign in page.");
+        
+        $("#fullName").on("blur", function()
+        {
+          if(!fullNamePattern.test($(this).val()))
+          {
+            $(this).trigger("focus").trigger("select");
+            messageArea.show().addClass("alert alert-danger").text("Please enter a valid Full Name. This must include at least a Capitalized first name followed by a Capitlalized last name.");
+          }
+          else
+          {
+              messageArea.removeAttr("class").hide();
+          }
+        });
+    }
 
-    var projectThree = document.createTextNode("This is a Activity Diagram that was created for a made-up library application. It was done by using Visio and having a knowledgeable background in System Development.");
+    function testContactNumber()
+    {
+      let messageArea = $("#messageArea");
+      let contactNumberPattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        
+        $("#contactNumber").on("blur", function()
+        {
+          if(!contactNumberPattern.test($(this).val()))
+          {
+            $(this).trigger("focus").trigger("select");
+            messageArea.show().addClass("alert alert-danger").text("Please enter a valid Contact Number. Country code and area code are both optional");
+          }
+          else
+          {
+              messageArea.removeAttr("class").hide();
+          }
+        });
+    }
 
-    document.getElementById("projectsIntroPara").appendChild(projectsIntro);
-    document.getElementById("projectOnePara").appendChild(projectOne);
-    document.getElementById("projectTwoPara").appendChild(projectTwo);
-    document.getElementById("projectThreePara").appendChild(projectThree);
-}
-function ServicesPageInfo() {
-    var servicesIntro = document.createTextNode("There are 3 services we offer. They are:");
+    function testEmailAddress()
+    {
+      let messageArea = $("#messageArea");
+      let emailAddressPattern = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
+        
+        $("#emailAddress").on("blur", function()
+        {
+          if(!emailAddressPattern.test($(this).val()))
+          {
+            $(this).trigger("focus").trigger("select");
+            messageArea.show().addClass("alert alert-danger").text("Please enter a valid Email Address.");
+          }
+          else
+          {
+              messageArea.removeAttr("class").hide();
+          }
+        });
+    }
 
-    var serviceOne = document.createTextNode("We offer database development services. We are experienced with tools, such as Microsoft Access and SQL and are able to assist with database development from planning and design to implementation.");
+    function formValidation()
+    {
+      testFullName();
+      testContactNumber();
+      testEmailAddress();
+    }
 
-    var serviceTwo = document.createTextNode("We offer web development services. We are able to implement a variety of programming languages and tools, including, but not limited to HTML, CSS, Javascript/Jquery, SQL, PHP, C#, and more.");
+    function displayContact()
+    {
+      // form validation
+      formValidation();
 
-    var serviceThree = document.createTextNode("We offer systems and analysis and development services. We are able to use UML and other methods to effectively analyze existing systems and develop new systems.");
+        $("#sendButton").on("click", (event)=> 
+        {
+          if($("#subscribeCheckbox")[0].checked)
+          {
+            let contact = new core.Contact(fullName.value, contactNumber.value, emailAddress.value);
 
-    document.getElementById("introServices").appendChild(servicesIntro);
-    document.getElementById("serviceOnePara").appendChild(serviceOne);
-    document.getElementById("serviceTwoPAra").appendChild(serviceTwo);
-    document.getElementById("serviceThreePara").appendChild(serviceThree);
-}
+            if(contact.serialize())
+            {
+              let key = contact.FullName.substring(0, 1) + Date.now();
 
-function ProductToProject() {
-    /*Using only JavaScript change the Products link found in the Navbar above to Projects. */
-
-    // Grab the current a tag for product
-    var currentAProductTag = document.getElementById("IdProductLink");
-
-    // Create new i and a tags
-    var iconForProject = document.createElement("i");
-    var newAProjectsTag = document.createElement("a");
-
-    // Set attributes to the i tag
-    iconForProject.setAttribute("class", "fa-solid fa-code");
-    iconForProject.setAttribute("style", "margin-right: 5px");
-
-    // Set attributes to the a tag
-    newAProjectsTag.setAttribute("href", "products.html");
-    newAProjectsTag.setAttribute("id", "IdProjects");
-
-    // Append the nodes together
-    newAProjectsTag.appendChild(iconForProject);
-    newAProjectsTag.appendChild(document.createTextNode("Projects"));
-
-    // Replace the old a tag with the new one
-    currentAProductTag.parentNode.replaceChild(newAProjectsTag, currentAProductTag);
-}
-
-function HumanResouceNav() {
-    /*Using only JavaScript, add another link to the Navbar above named Human Resources,
-    that sits between About Us and Contact Us. You may not hard code this in the html file
-    this must be done using DOM manipulation. Ensure that you also include an appropriate
-    font-icon using Font-Awesome */
-
-    // Find the ul in the Nav bar
-    var ul = document.getElementById("IdNavList");
-
-    // Create new tags
-    var li = document.createElement("li");
-    var a = document.createElement("a");
-    var iTagForHumanResources = document.createElement("i");
-
-    // Set attributes to the li tag
-    li.setAttribute("class", "nav-item");
-
-    // Set attributes to the a tag
-    a.setAttribute("href", "humanResources.html");
-    a.setAttribute("id", "IdhumanResources");
-
-    // Set attributes to the i tag
-    iTagForHumanResources.setAttribute("class", "fa-solid fa-person");
-    iTagForHumanResources.setAttribute("style", "margin-right: 5px");
-
-    // Append the nodes together
-    a.appendChild(iTagForHumanResources);
-    a.appendChild(document.createTextNode("Human Resources"));
-    li.appendChild(a);
-
-    // Insert the new link in the Navbar between About Us and Contact Us
-    ul.insertBefore(li, document.getElementById("IdContactList"));
-
-}
-
-function ContactFormSubmit(e) {
-    // the user's information gets outputted onto the console.
-    let output = ("Full Name: " + document.getElementById("name").value) + "\n" + "Phone Number: " + (document.getElementById("number").value) + "\n" + "Email Address: " + (document.getElementById("email").value) + "\n" + "Short Message: " + (document.getElementById("message").value);
-    console.log(output);
-
-    // This is how I was able to have the submit button to wait and then
-    // redirect. the preventDefault makes it so I am able to customize what
-    // the submit button does.
-    e.preventDefault();
-    window.setTimeout(function () {
-        window.location.replace("index.html");
-    }, 3000);
-    return false;
-}
-
-var username = "";
-
-// Grabs the current session username and creates a tag into the nav.
-function UsernameNav() {
-    username = sessionStorage.getItem('username');
-
-    $('#IdContactList').after('<li class="nav-text" id="IdUserNameList">' + username + '</li>');
-}
-
-$(document).ready(function () {
-
-    //Login - When the login/logout link gets clicked, checks if 
-    $('#IdLogin').click(function () {
-        username = sessionStorage.getItem('username');
-        if (username != null) {
-            sessionStorage.removeItem('username');
-            $("#IdUserNameList").remove();
-            alert("Successfully Logged Out!");
-        }
-    });
-
-    // Login - when the button is clicked it stores the new username in.
-    $("#IdLoginForm").submit(function () {
-
-        username = $("#usernameInput").val();
-        sessionStorage.setItem('username', username);
-        UsernameNav();
-
-    });
-
-    //Register - Create a div element with id = ErrorMessage
-    $("<div id = 'ErrorMessage'></div>").insertAfter("#IdRegisterForm");
-
-    //Hide Error Message
-    $("#ErrorMessage").hide();
-    let firstNameError = true;
-    $("#firstNameInput").keyup(function () {
-        validateFirstName();
-    });
-    let lastNameError = true;
-    $("#lastNameInput").keyup(function () {
-        validateLastName();
-    });
-    let emailError = true;
-    $("#emailInput").keyup(function () {
-        validateEmail();
-    });
-    let passwordError = true;
-    $("#passwordRegisterInput").keyup(function () {
-        validatePassword();
-    });
-    let confirmationError = true;
-    $("#passwordConfirmInput").keyup(function () {
-        validateConfirmation();
-    });
-
-    //Register - If first name or last name are shorter than 2 characters, display appropriate error
-    function validateFirstName() {
-        let firstName = $("#firstNameInput").val();
-        if (firstName.length < 2) {
-            if (!$('#IdFirstNameError').length) {
-                $("#ErrorMessage").show();
-                $('#ErrorMessage').append('<p id="IdFirstNameError">First name must have at least 2 characters.</p>');
-                //$("#ErrorMessage").html("<br>First name must have at least 2 characters.");
+              localStorage.setItem(key, contact.serialize());
             }
-            firstNameError = false;
-            return false;
-        }
-        else {
-            firstNameError = true;
-            $('#IdFirstNameError').remove();
-            //$("#ErrorMessage").hide();
-        }
+          }
+        });
     }
 
-    function validateLastName() {
-        let lastName = $("#lastNameInput").val();
-        if (lastName.length < 2) {
-            if (!$('#IdLastNameError').length) {
-                $("#ErrorMessage").show();
-                $('#ErrorMessage').append('<p id="IdLastNameError">Last name must have at least 2 characters.</p>');
-                //$("#ErrorMessage").html("<br>Last name must have at least 2 characters.");
-            }
-            lastNameError = false;
-            return false;
+    function displayContactList() 
+    {
+      // don't allow visitors to go here
+      authGuard();
+
+      if (localStorage.length > 0) 
+      {
+
+        let contactList = document.getElementById("contactList");
+
+        let data = "";
+
+        let keys = Object.keys(localStorage);
+         
+        let index = 1;
+
+        for (const key of keys) 
+        {
+          let contactData = localStorage.getItem(key);
+
+          let contact = new core.Contact();
+          contact.deserialize(contactData);
+
+          data += `<tr>
+          <th scope="row" class="text-center">${index}</th>
+          <td>${contact.FullName}</td>
+          <td>${contact.ContactNumber}</td>
+          <td>${contact.EmailAddress}</td>
+          <td class="text-center"><button value="${key}" class="btn btn-primary btn-sm edit"><i class="fas fa-edit fa-sm"></i> Edit</button></td>
+          <td class="text-center"><button value="${key}" class="btn btn-danger btn-sm delete"><i class="fas fa-trash-alt fa-sm"></i> Delete</button></td>
+          </tr>`;
+
+          index++;
         }
-        else {
-            lastNameError = true;
-            $('#IdLastNameError').remove();
-            //$("#ErrorMessage").hide();
-        }
+
+        contactList.innerHTML = data;
+
+        $("button.edit").on("click", function(){
+          location.href = "/edit#" + $(this).val();
+         });
+
+         $("button.delete").on("click", function(){
+           if(confirm("Are you sure?"))
+           {
+            localStorage.removeItem($(this).val());
+           }
+           location.href = "/contact-list"; // refresh the page
+         });
+
+         $("#addButton").on("click", function() 
+         {
+          location.href = "/edit";
+         });
+      }
     }
 
+    function displayEdit()
+    {
+      let key = location.hash.substring(1);
 
-    //Register - If email does not have at least 8 characters and contain an @ symbol, display appropriate error
-    function validateEmail() {
-        let email = $("#emailInput").val();
+      let contact = new core.Contact();
 
-        if (email.length < 8) {
-            if (!$('#IdEmailError').length) {
-                $("#ErrorMessage").show();
-                $('#ErrorMessage').append('<p id="IdEmailError">Email must contain at least 8 characters.</p>');
-                //$("#ErrorMessage").html("<br>Email must contain at least 8 characters.")
-            }
-            emailError = false;
-            return false;
-        }
-        else {
-            emailError = true;
-            //$("ErrorMessage").hide()
-            $('#IdEmailError').remove();
-        }
-        if (!(email.includes('@'))) {
-            if (!$('#IdEmailError').length) {
-                $("#ErrorMessage").show();
-                $('#ErrorMessage').append('<p id="IdEmailError">Email must contain "@" symbol.</p>');
-                //$("#ErrorMessage").html("<br>Email must contain '@' symbol.")
-            }
-            emailError = false;
-            return false;
-        }
-        else {
-            emailError = true;
-            //$("ErrorMessage").hide()
-            $('#IdEmailError').remove();
-        }
+      // check to ensure that the key is not empty
+      if(key != "")
+      {
+        // get contact info from localStorage
+        contact.deserialize(localStorage.getItem(key));
+
+        // display contact information in the form
+        $("#fullName").val(contact.FullName);
+        $("#contactNumber").val(contact.ContactNumber);
+        $("#emailAddress").val(contact.EmailAddress);
+      }
+      else
+      {
+        // modify the page so that it shows "Add Contact" in the header 
+        $("main>h1").text("Add Contact");
+        // modify edit button so that it shows "Add" as well as the appropriate icon
+        $("#editButton").html(`<i class="fas fa-plus-circle fa-lg"></i> Add`);
+      }
+
+      // form validation
+      formValidation();
+      
+     $("#editButton").on("click", function() 
+        {
+            // check to see if key is empty
+          if(key == "")
+          {
+            // create a new key
+            key = contact.FullName.substring(0, 1) + Date.now();
+          }
+
+          // copy contact info from form to contact object
+          contact.FullName = $("#fullName").val();
+          contact.ContactNumber = $("#contactNumber").val();
+          contact.EmailAddress = $("#emailAddress").val();
+
+          // add the contact info to localStorage
+          localStorage.setItem(key, contact.serialize());
+
+          // return to the contact list
+          location.href = "/contact-list";
+          
+        });
+
+      $("#cancelButton").on("click", function()
+      {
+        // return to the contact list
+        location.href = "/contact-list";
+      });
     }
 
+    /**
+     * Processes the Login and performs validation
+     */
+    function performLogin()
+    {
+      let messageArea = $("#messageArea");
+      messageArea.hide();
 
-    //Register - If password is less than 6 characters and does not match confirm password field, display error
-    function validatePassword() {
-        let password = $("#passwordRegisterInput").val();
-        if (password.length < 6) {
-            if (!$('#IdPasswordError').length) {
-                $("#ErrorMessage").show();
-                $('#ErrorMessage').append('<p id="IdPasswordError">Password must contain at least 6 characters.</p>');
-                //$("#ErrorMessage").html("<br>Password must contain at least 6 characters.")
-            }
-            passwordError = false;
-            return false;
+      let username = $("#username");
+      let password = $("#password");
+      let success = false;
+      let newUser = new core.User();
+
+      // use ajax to access the json file
+      $.get("./Data/users.json", function(data)
+      {
+        // check each user in the users.json file  (linear search)
+        for (const user of data.users) 
+        {
+          if(username.val() == user.Username && password.val() == user.Password)
+          {
+            newUser.fromJSON(user);
+            success = true;
+            break;
+          }
         }
-        else {
-            passwordError = true;
-            //$("#ErrorMessage").hide();
-            $('#IdPasswordError').remove();
+
+        // if username and password matches - success... then perform login
+        if(success)
+        {
+          // add user to session storage
+          sessionStorage.setItem("user", newUser.serialize());
+
+          // hide any error message
+          messageArea.removeAttr("class").hide();
+
+          // redirect user to secure area - contact-list.html
+          location.href = "/contact-list";
         }
+        else
+        {
+          // display an error message
+          username.trigger("focus").trigger("select");
+          messageArea.show().addClass("alert alert-danger").text("Error: Invalid login information");
+        }
+      });
     }
-    function validateConfirmation() {
-        let password = $("#passwordRegisterInput").val();
-        let confirmation = $("#passwordConfirmInput").val();
-        if (password != confirmation) {
-            if (!$('#IdConfirmationError').length) {
-                $("#ErrorMessage").show();
-                $('#ErrorMessage').append('<p id="IdConfirmationError">Password and Confirmation Password must match.</p>');
-                //$("#ErrorMessage").html("<br>Password and Confirmation Password must match.")
-            }
-            confirmationError = false;
-            return false;
+
+    /**
+     * Displays and Processes the Login page
+     */
+    function displayLogin()
+    {
+
+      $("#loginButton").on("click", function() 
+      {
+        performLogin();
+      });
+
+      $("#password").on("keypress", function(event)
+      {
+        if(event.key == "Enter")
+        {
+          performLogin();
         }
-        else {
-            confirmationError = true;
-            //$("#ErrorMessage").hide();
-            $('#IdConfirmationError').remove();
-        }
+        });
+
+      $("#cancelButton").on("click", function()
+      {
+        // clear the login form
+        document.forms[0].reset();
+        // return to the home page
+        location.href = "/home";
+      });
     }
-    //Register When user clicks on register button - Prevent default form behaviour
-    $("#IdRegisterForm").submit(function (e) {
-        e.preventDefault();
 
-        validateFirstName();
-        validateLastName();
-        validateEmail();
-        validatePassword();
-        validateConfirmation();
-        // if there is no errors create a user.
-        if ((firstNameError == true) &&
-            (lastNameError == true) &&
-            (emailError == true) &&
-            (passwordError == true) &&
-            (confirmationError == true)) {
-            //Register - When form is submitted create instance of User class and display to the console.
-            let firstName = $("#firstNameInput").val();
-            let lastName = $("#lastNameInput").val();
-            let email = $("#emailInput").val();
-            let password = $('#passwordRegisterInput').val();
+    function displayRegister()
+    {
 
-            let username = firstName.substring(0, 2) + '.' + lastName.substring(0, 2);
+    }
 
-            var userInstance = new User(firstName, lastName, username, email, password);
+    function toggleLogin()
+    {
+      // if user is logged in
+      if(sessionStorage.getItem("user"))
+      {
+        // swap out the login link for logout
+        $("#loginListItem").html(
+        `<a id="logout" class="nav-link" aria-current="page"><i class="fas fa-sign-out-alt"></i> Logout</a>`
+        );
 
-            console.log(userInstance);
+        $("#logout").on("click", function()
+        {
+          // perform logout
+          sessionStorage.clear();
 
-        }
-    });
+          // redirect back to login
+          location.href = "/login";
+        });
 
-    // Check if the Error message div is empty. if it is hide it.
-    $("#IdRegisterForm").keyup(function () {
-        if ($('#ErrorMessage').contents().length == 0) {
-            $("#ErrorMessage").hide();
-        }
-    });
-});
+        // make it look like each nav item is an active link
+        $("#logout").on("mouseover", function()
+        {
+          $(this).css('cursor', 'pointer');
+        });
+       
+        $(`<li class="nav-item">
+        <a id="contact-list" class="nav-link" aria-current="page"><i class="fas fa-users fa-lg"></i> Contact List</a>
+      </li>`).insertBefore("#loginListItem");
+      }
+      else
+      {
+        // swap out the login link for logout
+        $("#loginListItem").html(
+          `<a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>`
+          );
+      }
+    }
+
+    function authGuard()
+    {
+      if(!sessionStorage.getItem("user"))
+      {
+      // redirect back to login page
+      location.href = "/login";
+      }
+    }
+
+    function display404()
+    {
+
+    }
+
+    function ActiveLinkCallBack(activeLink)
+    {
+      switch (activeLink) 
+      {
+        case "home": return displayHome;
+        case "about": return displayAbout;
+        case "projects": return displayProjects;
+        case "services": return displayServices;
+        case "contact": return displayContact;
+        case "contact-list": return displayContactList;
+        case "edit": return displayEdit;
+        case "login": return displayLogin;
+        case "register": return displayRegister;
+        case "404": return display404;
+        default:
+          console.error("ERROR: callback does not exist: " + activeLink);
+          break;
+      }
+    }
+
+    /**
+     * This function adds a new Task to the TaskList
+     */
+    function AddNewTask() 
+    {
+      let messageArea = $("#messageArea");
+      messageArea.hide();
+      let taskInput = $("#taskTextInput");
+
+      if (taskInput.val() != "" && taskInput.val().charAt(0) != " ") 
+      {
+        let newElement = `
+              <li class="list-group-item" id="task">
+              <span id="taskText">${taskInput.val()}</span>
+              <span class="float-end">
+                  <button class="btn btn-outline-primary btn-sm editButton"><i class="fas fa-edit"></i>
+                  <button class="btn btn-outline-danger btn-sm deleteButton"><i class="fas fa-trash-alt"></i></button>
+              </span>
+              <input type="text" class="form-control edit-task editTextInput">
+              </li>
+              `;
+        $("#taskList").append(newElement);
+        messageArea.removeAttr("class").hide();
+        taskInput.val("");
+      } 
+      else 
+      {
+        taskInput.trigger("focus").trigger("select");
+        messageArea.show().addClass("alert alert-danger").text("Please enter a valid Task.");
+      }
+    }
+
+    /**
+     * This function is the Callback function for the TaskList
+     *
+     */
+    function DisplayTaskList()
+    {
+        let messageArea = $("#messageArea");
+        messageArea.hide();
+        let taskInput = $("#taskTextInput");
+
+        // add a new Task to the Task List
+        $("#newTaskButton").on("click", function()
+        {         
+            AddNewTask();
+        });
+
+        taskInput.on("keypress", function(event)
+        {
+          if(event.key == "Enter")
+          {
+            AddNewTask();
+          }
+         });
+
+        // Edit an Item in the Task List
+        $("ul").on("click", ".editButton", function(){
+           let editText = $(this).parent().parent().children(".editTextInput");
+           let text = $(this).parent().parent().text();
+           editText.val(text).show().trigger("select");
+           editText.on("keypress", function(event)
+           {
+            if(event.key == "Enter")
+            {
+              if(editText.val() != "" && editText.val().charAt(0) != " ")
+              {
+                editText.hide();
+                $(this).parent().children("#taskText").text(editText.val());
+                messageArea.removeAttr("class").hide();
+              }
+              else
+              {
+                editText.trigger("focus").trigger("select");
+                messageArea.show().addClass("alert alert-danger").text("Please enter a valid Task.");
+              }
+            }
+           });
+        });
+
+        // Delete a Task from the Task List
+        $("ul").on("click", ".deleteButton", function(){
+            if(confirm("Are you sure?"))
+            {
+                $(this).closest("li").remove();
+            }    
+        });
+    }
+
+    function Start()
+    {
+        console.log("App Started...");
+
+        loadHeader(router.ActiveLink);
+      
+        loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+
+        loadFooter();
+    }
+
+    window.addEventListener("load", Start);
+
+    core.Start = Start;
+
+})(core || (core={}));
