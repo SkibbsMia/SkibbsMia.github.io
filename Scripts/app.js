@@ -355,8 +355,7 @@
   function authGuard() {
     if (!sessionStorage.getItem("user")) {
       // redirect back to login page
-
-      ActiveLink = '/login';
+      location.href = "/login.html";
     }
   }
 
