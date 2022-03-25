@@ -356,7 +356,7 @@
     if (!sessionStorage.getItem("user")) {
       // redirect back to login page
 
-      ActiveLink("/login");
+      ActiveLink = '/login';
     }
   }
 
