@@ -283,6 +283,8 @@
 
         // redirect user to secure area - contact-list.html
         location.href = "/contact-list";
+        router.ActiveLink = "contact-list";
+        Start();
       }
       else {
         // display an error message
@@ -355,6 +357,7 @@
   function authGuard() {
     if (!sessionStorage.getItem("user")) {
       // redirect back to login page
+      location.href = "/login";
       router.ActiveLink = "login";
       Start();
     }
