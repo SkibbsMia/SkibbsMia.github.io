@@ -6,6 +6,6 @@
     if(sessionStorage.getItem("user"))
     {
     // redirect to the secure area
-    location.href = "contact-list.html";
+    location.href = "contact-list";
     }
 })();
