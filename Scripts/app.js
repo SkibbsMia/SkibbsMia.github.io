@@ -240,9 +240,9 @@
       localStorage.setItem(key, contact.serialize());
 
       // return to the contact list
-      location.href = "./contact-list";
       router.ActiveLink = "contact-list";
-      Start;
+      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+      history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
 
     });
 
@@ -250,7 +250,8 @@
       // return to the contact list
       //location.href = "./contact-list";
       router.ActiveLink = "contact-list";
-      Start;
+      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+      history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
     });
   }
 
@@ -290,6 +291,8 @@
         router.ActiveLink = "contact-list";
         loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
         history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
+
+        toggleLogin();
         }
       else {
         // display an error message
@@ -319,7 +322,8 @@
       document.forms[0].reset();
       // return to the home page
       router.ActiveLink = "home";
-      Start;
+      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+      history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
     });
   }
 
@@ -342,7 +346,8 @@
         // redirect back to login
         //location.href = "/login";
         router.ActiveLink = "login";
-        Start;
+        loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+        history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
       });
 
       // make it look like each nav item is an active link
@@ -367,7 +372,8 @@
       // redirect back to login page
       //location.href = "/login";
       router.ActiveLink = "login";
-      Start;
+      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+      history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
     }
   }
 
@@ -428,6 +434,9 @@
    *
    */
   function DisplayTaskList() {
+
+    authGuard();
+    
     let messageArea = $("#messageArea");
     messageArea.hide();
     let taskInput = $("#taskTextInput");
