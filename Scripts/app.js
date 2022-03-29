@@ -282,7 +282,7 @@
         messageArea.removeAttr("class").hide();
 
         // redirect user to secure area - contact-list.html
-        location.href = "/contact-list";
+        location.href = "/contact-list.html";
         router.ActiveLink = "contact-list";
         Start();
       }
@@ -374,11 +374,11 @@
       case "projects": return displayProjects;
       case "services": return displayServices;
       case "contact": return displayContact;
-      case "contact-list": return displayContactList;
       case "edit": return displayEdit;
       case "login": return displayLogin;
       case "register": return displayRegister;
       case "task-list": return DisplayTaskList;
+      case "contact-list": return displayContactList;
       case "404": return display404;
       default:
         console.error("ERROR: callback does not exist: " + activeLink);
