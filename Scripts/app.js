@@ -329,6 +329,7 @@
 
           // redirect user to secure area - contact-list.html
           location.href = "/contact-list";
+          Start()
         }
         else
         {
