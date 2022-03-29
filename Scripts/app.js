@@ -280,14 +280,14 @@
           localStorage.setItem(key, contact.serialize());
 
           // return to the contact list
-          location.href = "/contact-list";
+          location.href = "./contact-list";
           
         });
 
       $("#cancelButton").on("click", function()
       {
         // return to the contact list
-        location.href = "/contact-list";
+        location.href = "./contact-list";
       });
     }
 
@@ -328,7 +328,7 @@
           messageArea.removeAttr("class").hide();
 
           // redirect user to secure area - contact-list.html
-          router.ActiveLink = "/contact-list";
+          location.pathname = "./Views/content/contact-list";
         }
         else
         {
