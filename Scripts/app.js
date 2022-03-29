@@ -421,9 +421,6 @@
    */
   function DisplayTaskList() {
 
-    // Make sure they are logged in to see the task list.
-    authGuard();
-
     let messageArea = $("#messageArea");
     messageArea.hide();
     let taskInput = $("#taskTextInput");
