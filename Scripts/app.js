@@ -417,7 +417,7 @@
     // if user is logged in
     if (sessionStorage.getItem("user")) {
       // show the task-list in the nav bar
-      $("#taskListItem").html("");
+      $("#taskListItem").html('<li id="taskListItem" class="nav-item"><a id="task-list" class="nav-link" aria-current="page">Task List</a></li>');
 
       // make it look like each nav item is an active link
       $("#task-list").on("mouseover", function () {
@@ -426,7 +426,7 @@
     }
     else {
       // swap out the login link for logout
-      $("#taskListItem").html('<li id="taskListItem" class="nav-item"><a id="task-list" class="nav-link" aria-current="page">Task List</a></li>');
+      $("#taskListItem").html("");
     }
   }
 
