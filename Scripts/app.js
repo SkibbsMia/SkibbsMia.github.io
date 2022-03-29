@@ -18,6 +18,7 @@
       $("header").html(data); // load the navigation bar
 
       toggleLogin(); // add login / logout and secure links
+      toggleTaskList();
 
       $(`#${pageName}`).addClass("active"); // highlight active link
 
@@ -295,6 +296,7 @@
         $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
 
         toggleLogin();
+        toggleTaskList();
       }
       else {
         // display an error message
@@ -356,6 +358,7 @@
         $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
 
         toggleLogin();
+        toggleTaskList();
       });
 
       // make it look like each nav item is an active link
