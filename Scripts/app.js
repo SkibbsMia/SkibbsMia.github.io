@@ -288,12 +288,14 @@
 
         // redirect user to secure area - contact-list.html
         //location.pathname = "./contact-list";
+        $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
         router.ActiveLink = "contact-list";
         loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
         history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
+        $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
 
         toggleLogin();
-        }
+      }
       else {
         // display an error message
         username.trigger("focus").trigger("select");
@@ -321,9 +323,11 @@
       // clear the login form
       document.forms[0].reset();
       // return to the home page
+      $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
       router.ActiveLink = "home";
       loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
       history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
+      $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
     });
   }
 
@@ -345,9 +349,13 @@
 
         // redirect back to login
         //location.href = "/login";
+        $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
         router.ActiveLink = "login";
         loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
         history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
+        $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
+
+        toggleLogin();
       });
 
       // make it look like each nav item is an active link
@@ -371,9 +379,11 @@
     if (!sessionStorage.getItem("user")) {
       // redirect back to login page
       //location.href = "/login";
+      $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
       router.ActiveLink = "login";
       loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
       history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
+      $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
     }
   }
 
@@ -397,6 +407,23 @@
       default:
         console.error("ERROR: callback does not exist: " + activeLink);
         break;
+    }
+  }
+
+  function toggleTaskList() {
+    // if user is logged in
+    if (sessionStorage.getItem("user")) {
+      // show the task-list in the nav bar
+      $("#taskListItem").show();
+
+      // make it look like each nav item is an active link
+      $("#task-list").on("mouseover", function () {
+        $(this).css('cursor', 'pointer');
+      });
+    }
+    else {
+      // swap out the login link for logout
+      $("#taskListItem").show();
     }
   }
 
@@ -436,7 +463,7 @@
   function DisplayTaskList() {
 
     authGuard();
-    
+
     let messageArea = $("#messageArea");
     messageArea.hide();
     let taskInput = $("#taskTextInput");
