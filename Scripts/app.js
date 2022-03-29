@@ -288,7 +288,8 @@
         // redirect user to secure area - contact-list.html
         //location.pathname = "./contact-list";
         router.ActiveLink = "contact-list";
-        Start;
+        loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+        history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
         }
       else {
         // display an error message
