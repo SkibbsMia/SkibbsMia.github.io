@@ -150,7 +150,7 @@
 
   function displayContactList() {
     // don't allow visitors to go here
-    authGuard();
+    //authGuard();
 
     if (localStorage.length > 0) {
 
