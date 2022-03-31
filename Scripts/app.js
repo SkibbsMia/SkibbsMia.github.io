@@ -242,7 +242,7 @@
 
       // return to the contact list
       router.ActiveLink = "contact-list";
-      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+      Start();
       history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
 
     });
@@ -251,7 +251,7 @@
       // return to the contact list
       //location.href = "./contact-list";
       router.ActiveLink = "contact-list";
-      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+      Start();
       history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
     });
   }
@@ -291,7 +291,7 @@
         //location.pathname = "./contact-list";
         $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
         router.ActiveLink = "contact-list";
-        loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+        Start();
         history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
         $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
 
@@ -327,7 +327,7 @@
       // return to the home page
       $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
       router.ActiveLink = "home";
-      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+      Start();
       history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
       $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
     });
@@ -353,7 +353,7 @@
         //location.href = "/login";
         $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
         router.ActiveLink = "login";
-        loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+        lStart();
         history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
         $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
 
@@ -387,7 +387,7 @@
       //location.href = "/login";
       $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
       router.ActiveLink = "login";
-      loadContent(router.ActiveLink, ActiveLinkCallBack(router.ActiveLink));
+      Start();
       history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
       $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
     }
