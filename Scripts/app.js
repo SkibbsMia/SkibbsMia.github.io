@@ -353,11 +353,10 @@
         //location.href = "/login";
         $(`#${router.ActiveLink}`).removeClass("active"); // removes highlighted link
         router.ActiveLink = "login";
-        lStart();
+        Start();
         history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
         $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
-
-        loadHeader(router.ActiveLink);
+        
         toggleLogin();
         toggleTaskList();
       });
