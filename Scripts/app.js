@@ -357,6 +357,7 @@
         history.pushState({}, "", router.ActiveLink); // this replaces the url displayed in the browser
         $(`#${router.ActiveLink}`).addClass("active"); // applies highlighted link to new page
 
+        loadHeader(router.ActiveLink);
         toggleLogin();
         toggleTaskList();
       });
@@ -366,15 +367,17 @@
         $(this).css('cursor', 'pointer');
       });
 
-      $(`<li class="nav-item">
+      $(`<li id="contactlist" class="nav-item">
         <a id="contact-list" class="nav-link" aria-current="page"><i class="fas fa-users fa-lg"></i> Contact List</a>
       </li>`).insertBefore("#loginListItem");
     }
     else {
       // swap out the login link for logout
       $("#loginListItem").html(
-        `<a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>`
+        '<a id="login" class="nav-link" aria-current="page"><i class="fas fa-sign-in-alt"></i> Login</a>'
       );
+
+      $("#contactlist").html("");
     }
   }
 
